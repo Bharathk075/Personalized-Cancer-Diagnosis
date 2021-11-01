@@ -5,6 +5,15 @@
 #### Problem statement : 
 * Classify the given genetic variations/mutations based on evidence from text-based clinical literature.
 
+#### Detailed Description:
+
+* When we break/mutate a gene, it has multiple variants.
+###### Work-Flow:
+1. A Molecualr Pathologist selects a list of genetic variations of interest that he/she want to analyze
+2. The molecular pathologist searches for evidence in the medical literature that somehow are relevant to genetic variations of interest
+3. Finally this molecular pathologist spends a huge amount of time analyzing the evidence related to each of the the variations to classify them
+4. Our goal is to replace step-3 by a Machine Learning Model
+
 #### Data Overview
 Source: https://www.kaggle.com/c/msk-redefining-cancer-treatment/data
 * We have two data files: one conatins the information about the genetic mutations and the other contains the clinical evidence (text) that human experts/pathologists use to classify the genetic mutations.
