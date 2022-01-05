@@ -75,4 +75,4 @@ We have implemeted the Following Models
 | Random Forest | 1.11 |
 | Naive Bayes | 1.265 |
 | Stacking | 1.121 |
-| Logistic Regression with Feature Engineering | 1.02 |
+| Logistic Regression with Feature Engineering | 0.98 |
