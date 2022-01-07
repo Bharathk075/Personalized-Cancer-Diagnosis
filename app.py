@@ -1,19 +1,18 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import re
 import time
 import warnings
 import nltk
-import seaborn as sns
+#import seaborn as sns
 from sklearn.preprocessing import normalize
 import joblib
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score, log_loss
+#from sklearn.metrics import confusion_matrix
+#from sklearn.metrics import accuracy_score, log_loss
 from sklearn.linear_model import SGDClassifier
-from imblearn.over_sampling import SMOTE
 from scipy.sparse import hstack
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.preprocessing import Normalizer
