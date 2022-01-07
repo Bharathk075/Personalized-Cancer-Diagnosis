@@ -1,4 +1,8 @@
 import streamlit as st
+import bz2
+import pickle
+import _pickle as cPickle
+import pickle
 import pandas as pd
 import numpy as np
 #import matplotlib.pyplot as plt
@@ -25,19 +29,26 @@ st.write("""
 # Personalized-Cancer-Diagnosis Prediction App
 This app predicts the **Personalized-Cancer-Diagnosis** 
 
-Data obtained from the [palmerpenguins library](https://github.com/allisonhorst/palmerpenguins) in Kagle.
+Data obtained from the [Kaggle](https://www.kaggle.com/c/msk-redefining-cancer-treatment/data)
 """)
 
 st.sidebar.header('User Input Features')
 
 st.sidebar.markdown("""
-[Example CSV input file](https://raw.githubusercontent.com/dataprofessor/data/master/penguins_example.csv)
+[Example CSV input file](https://github.com/Bharathk075/Personalized-Cancer-Diagnosis/blob/main/test_data.zip)
 """)
 
 @st.cache
 def load_pickle_file(filename):
     pickle_obj = joblib.load(f"pickle_files/{filename}")
     return pickle_obj
+
+@st.cache
+# Load any compressed pickle file
+def decompress_pickle(file):
+ data = bz2.BZ2File(file, 'rb')
+ data = cPickle.load(data)
+ return data
 
 @st.cache
 def nlp_preprocessing(total_text,stop_words): #, index, column)
@@ -76,9 +87,8 @@ def predict_data(model,vectorizer_Gene,vectorizer_Variation,vectorizer_TEXT,myte
 
 
 def load_test_data():
-    t1 = pd.read_csv("test_data.csv") #,index = False
+    t1 = pd.read_csv("test_data.zip")
     test = t1[t1['ID'].isin([3316,3317,3318,3319,3320])]
-    #test = test.drop(['Class'],axis = 1)
     return test
 
 
@@ -105,10 +115,12 @@ def main():
     
 
 if __name__ == "__main__":
+    #st.write(os.listdir("pickle_files"))
     clf = load_pickle_file("model.pkl")   #clf = joblib.load("pickle_files/")
     vectorizer_Gene = load_pickle_file("vectorizer_Gene.pkl") #joblib.load('pickle_files/vectorizer_Gene.pkl')
     vectorizer_Variation = load_pickle_file("vectorizer_Variation.pkl") #joblib.load('pickle_files/vectorizer_Variation.pkl')
-    vectorizer_TEXT = load_pickle_file("vectorizer_TEXT.pkl") #joblib.load('pickle_files/vectorizer_TEXT.pkl')
+    #vectorizer_TEXT =  joblib.load('pickle_files/vectorizer_TEXT.zip') #load_pickle_file("vectorizer_TEXT.pkl") #
+    vectorizer_TEXT = decompress_pickle('pickle_files/vectorizer_TEXT.pkl.pbz2')
     stop_words = set(stopwords.words('english'))
     df = load_test_data()
     mytest_data = df.sample(1)
